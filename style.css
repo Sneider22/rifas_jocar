@@ -71,7 +71,7 @@ main {
 /* Números estilo círculo gris */
 .numeros-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 0.5em;
   justify-items: center;
   margin-bottom: 5em;
@@ -83,29 +83,32 @@ main {
 }
 .numero {
   width: 48px;
-  height: 48px;
-  background: #f3f3f3;
-  border-radius: 50%;
+  height: 38px;
+  background: #e3f2fd;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1em;
-  font-weight: 600;
-  color: #444;
+  font-weight: 700;
+  color: #1976d2;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   user-select: none;
-  border: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border: 2px solid #bbdefb;
+  margin: 1px;
+  box-shadow: none;
 }
 .numero.seleccionado {
-  background: #bfa13a;
-  color: #fff;
-  box-shadow: 0 0 8px #bfa13a55;
+  background: #ffd600;
+  color: #1976d2;
+  border: 2px solid #ffd600;
+  box-shadow: 0 0 6px #ffd60099;
 }
 .numero.ocupado {
-  background: #d1d1d1;
-  color: #fff;
+  background: #e0e0e0;
+  color: #bdbdbd;
+  border: 2px solid #bdbdbd;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -121,6 +124,7 @@ main {
   flex-direction: column;
   align-items: center;
   z-index: 100;
+  margin-bottom: 80px;
 }
 .panel-inferior .contador {
   font-size: 1.3em;
@@ -174,6 +178,7 @@ main {
     max-width: 500px;
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 80px;
   }
 }
 .modal {
@@ -375,7 +380,12 @@ footer.footer {
     padding: 1.5rem 2vw;
   }
   .numeros-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .numero {
+    width: 32px;
+    height: 28px;
+    font-size: 0.95em;
   }
   .logo-info {
     flex-direction: column;
@@ -418,20 +428,23 @@ footer.footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 44px;
-  height: 44px;
-  background: none;
+  width: 48px;
+  height: 48px;
+  background: #fff;
   border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   cursor: pointer;
   z-index: 201;
   margin-left: 1em;
+  transition: box-shadow 0.2s;
 }
 .hamburger span {
   display: block;
-  width: 28px;
+  width: 26px;
   height: 4px;
   margin: 4px 0;
-  background: #fff;
+  background: #bfa13a;
   border-radius: 2px;
   transition: 0.3s;
 }
@@ -454,6 +467,7 @@ footer.footer {
     z-index: 200;
     transition: left 0.3s;
     margin: 0;
+    display: flex;
   }
   .nav-list.open {
     left: 0;
@@ -476,15 +490,7 @@ footer.footer {
     color: #1976d2;
   }
   .navbar ul {
-    flex-direction: column;
-    gap: 0;
-    align-items: stretch;
-    position: static;
-    box-shadow: none;
-    background: none;
-    width: 100%;
-    height: auto;
-    padding: 0;
+    display: none;
   }
 }
 @media (min-width: 701px) {
@@ -500,6 +506,7 @@ footer.footer {
     box-shadow: none;
     padding: 0;
     gap: 2em;
+    display: flex;
   }
 }
 /* Fondo oscuro al abrir menú */
