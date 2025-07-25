@@ -1,0 +1,515 @@
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  background: #e3f0ff;
+  color: #1a237e;
+}
+.header {
+  background: #fffde7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.empresa-info h1 {
+  margin: 0 0 0.2em 0;
+  font-size: 2rem;
+  color: #1976d2;
+}
+.empresa-info p {
+  margin: 0.1em 0;
+}
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.panel-numeros h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+/* Botón "Elegir a la suerte" */
+.suerte-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.2em auto 1em auto;
+  padding: 0.6em 2em;
+  background: #fff;
+  border: 2.5px solid #bfa13a;
+  color: #bfa13a;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.suerte-btn:hover {
+  background: #fffbe7;
+}
+.suerte-btn .star {
+  margin: 0 0.5em;
+  font-size: 1.2em;
+}
+
+/* Números estilo círculo gris */
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5em;
+  justify-items: center;
+  margin-bottom: 5em;
+}
+@media (min-width: 500px) {
+  .numeros-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+.numero {
+  width: 48px;
+  height: 48px;
+  background: #f3f3f3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  user-select: none;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.numero.seleccionado {
+  background: #bfa13a;
+  color: #fff;
+  box-shadow: 0 0 8px #bfa13a55;
+}
+.numero.ocupado {
+  background: #d1d1d1;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Panel inferior fijo para selección */
+.panel-inferior {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  padding: 1em 0.7em 1.2em 0.7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+.panel-inferior .contador {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #bfa13a;
+  margin-bottom: 0.2em;
+}
+.panel-inferior .contador span {
+  color: #222;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-left: 0.2em;
+}
+.panel-inferior .label {
+  font-size: 0.95em;
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 0.7em;
+}
+.panel-inferior .continuar-btn {
+  width: 90vw;
+  max-width: 350px;
+  background: #bfa13a;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 1.5em;
+  padding: 0.9em 0;
+  margin-top: 0.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+}
+.panel-inferior .continuar-btn:disabled {
+  background: #d1d1d1;
+  color: #fff;
+  cursor: not-allowed;
+}
+.panel-inferior .flecha {
+  font-size: 1.3em;
+  margin-right: 0.5em;
+}
+
+@media (min-width: 700px) {
+  .panel-inferior {
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal.oculto {
+  display: none;
+}
+.modal-contenido {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  position: relative;
+}
+.cerrar-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+footer.footer {
+  background: #222;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 10vw;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer h4 {
+  margin-top: 0;
+}
+.footer a {
+  color: #e67e22;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.whatsapp-burbuja {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  transition: box-shadow 0.2s;
+}
+.whatsapp-burbuja:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.whatsapp-burbuja img {
+  width: 36px;
+  height: 36px;
+}
+.panel-tickets {
+  margin-top: 2rem;
+  background: #fffde7;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.tickets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.ticket-item {
+  background: #e3f2fd;
+  border-left: 5px solid #ffd600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #1a237e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ticket-item strong {
+  color: #1976d2;
+}
+/* Menú desplegable responsivo */
+.navbar {
+  background: #1976d2;
+  padding: 0.5em 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin: 0;
+  padding: 0;
+}
+.navbar .nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 0.5em 1.2em;
+  border-radius: 6px 6px 0 0;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar .nav-link.active, .navbar .nav-link:hover {
+  background: #ffd600;
+  color: #1976d2;
+}
+.buscador-tickets {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+.buscador-tickets input {
+  padding: 0.5em 1em;
+  border: 1.5px solid #1976d2;
+  border-radius: 6px;
+  font-size: 1em;
+  outline: none;
+}
+.buscador-tickets button {
+  background: #ffd600;
+  color: #1976d2;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  font-size: 1.1em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.buscador-tickets button:hover {
+  background: #ffe066;
+}
+/* Formulario de registro responsivo y estético */
+#modal-datos .modal-contenido form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+#modal-datos label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  color: #1976d2;
+}
+#modal-datos input[type="text"],
+#modal-datos input[type="tel"] {
+  padding: 0.7em 1em;
+  border: 1.5px solid #1976d2;
+  border-radius: 7px;
+  font-size: 1.1em;
+  outline: none;
+  margin-bottom: 0.2em;
+}
+#modal-datos .modal-botones {
+  flex-direction: column;
+  gap: 0.7em;
+}
+#modal-datos button {
+  width: 100%;
+  padding: 0.8em 0;
+  font-size: 1.1em;
+}
+
+/* Mejorar responsividad general */
+@media (max-width: 700px) {
+  main {
+    padding: 0.5rem;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 2vw;
+  }
+  .numeros-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .logo-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .panel-tickets, .panel-numeros {
+    padding: 0.5em 0.2em;
+  }
+  .ticket-item {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1em;
+    gap: 0.2em;
+  }
+  .buscador-tickets {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5em;
+  }
+  .navbar ul {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+  .navbar .nav-link {
+    border-radius: 0;
+    padding: 1em;
+    font-size: 1.15em;
+    border-bottom: 1px solid #fff;
+  }
+  .navbar .nav-link.active {
+    background: #ffd600;
+    color: #1976d2;
+    border-radius: 0;
+  }
+} 
+/* Menú hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 201;
+  margin-left: 1em;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 700px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-list {
+    position: fixed;
+    top: 0; left: -100vw;
+    width: 70vw;
+    max-width: 260px;
+    height: 100vh;
+    background: #1976d2;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5em 1.5em;
+    gap: 2em;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.13);
+    z-index: 200;
+    transition: left 0.3s;
+    margin: 0;
+  }
+  .nav-list.open {
+    left: 0;
+  }
+  .nav-list li {
+    width: 100%;
+  }
+  .nav-list .nav-link {
+    display: block;
+    width: 100%;
+    padding: 1em 0.5em;
+    font-size: 1.15em;
+    border-radius: 0.7em;
+    color: #fff;
+    background: none;
+    margin-bottom: 0.5em;
+  }
+  .nav-list .nav-link.active, .nav-list .nav-link:hover {
+    background: #ffd600;
+    color: #1976d2;
+  }
+  .navbar ul {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    position: static;
+    box-shadow: none;
+    background: none;
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+}
+@media (min-width: 701px) {
+  .hamburger {
+    display: none !important;
+  }
+  .nav-list {
+    position: static;
+    flex-direction: row;
+    background: none;
+    height: auto;
+    width: auto;
+    box-shadow: none;
+    padding: 0;
+    gap: 2em;
+  }
+}
+/* Fondo oscuro al abrir menú */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 199;
+}
+.menu-overlay.active {
+  display: block;
+} 
