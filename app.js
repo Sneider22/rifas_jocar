@@ -38,14 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
         div.classList.add('seleccionado');
         seleccionTemp.push(numStr);
       }
-      updatePanelInferior();
+      updatePanelSuperior();
     });
     grid.appendChild(div);
   }
 
-  function updatePanelInferior() {
+  function updatePanelSuperior() {
     contadorSeleccionados.textContent = seleccionTemp.length;
-    btnContinuar.disabled = seleccionTemp.length === 0;
+    if (seleccionTemp.length > 0) {
+      btnContinuar.style.display = 'flex';
+    } else {
+      btnContinuar.style.display = 'none';
+    }
   }
 
   btnContinuar.addEventListener('click', () => {
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomDiv = disponibles[Math.floor(Math.random() * disponibles.length)];
     randomDiv.classList.add('seleccionado');
     seleccionTemp.push(randomDiv.textContent);
-    updatePanelInferior();
+    updatePanelSuperior();
   });
 
   const navSeleccion = document.getElementById('nav-seleccion');
@@ -72,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnBuscarNombre = document.getElementById('btn-buscar-nombre');
   const busquedaNumero = document.getElementById('busqueda-numero');
   const btnBuscarNumero = document.getElementById('btn-buscar-numero');
+  const busquedaGeneral = document.getElementById('busqueda-general');
+  const btnBuscarGeneral = document.getElementById('btn-buscar-general');
 
   function mostrarSeleccion() {
     paginaSeleccion.style.display = '';
@@ -84,21 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
     paginaTickets.style.display = '';
     navSeleccion.classList.remove('active');
     navTickets.classList.add('active');
-    renderTicketsFiltro();
+    renderTicketsFiltroGeneral();
   }
   navSeleccion.addEventListener('click', (e) => { e.preventDefault(); mostrarSeleccion(); });
   navTickets.addEventListener('click', (e) => { e.preventDefault(); mostrarTickets(); });
 
-  function renderTicketsFiltro(nombreFiltro = '', numeroFiltro = '') {
+  function renderTicketsFiltroGeneral(filtro = '') {
     ticketsList.innerHTML = '';
     let entries = Object.entries(tickets);
-    if (nombreFiltro) {
-      const filtroLower = nombreFiltro.trim().toLowerCase();
-      entries = entries.filter(([, data]) => data.nombre.toLowerCase().includes(filtroLower));
-    }
-    if (numeroFiltro) {
-      const numFiltro = numeroFiltro.trim().padStart(3, '0');
-      entries = entries.filter(([num]) => num === numFiltro);
+    if (filtro) {
+      const f = filtro.trim().toLowerCase();
+      // Prioridad: coincidencia exacta de número
+      entries = entries.filter(([num, data]) =>
+        num === f.padStart(3, '0') ||
+        data.nombre.toLowerCase().includes(f) ||
+        data.cedula.toLowerCase().includes(f) ||
+        data.telefono.toLowerCase().includes(f)
+      );
     }
     if (entries.length === 0) {
       ticketsList.innerHTML = '<div style="color:#888;">No se encontraron tickets.</div>';
@@ -108,23 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = document.createElement('div');
       item.className = 'ticket-item';
       item.innerHTML = `<strong>#${num}</strong> - ${data.nombre} | Cédula: ${data.cedula} | Tel: ${data.telefono}`;
+      // Botón eliminar
+      const btnDel = document.createElement('button');
+      btnDel.className = 'ticket-delete';
+      btnDel.title = 'Eliminar ticket';
+      btnDel.innerHTML = '🗑️';
+      btnDel.onclick = () => {
+        if (confirm(`¿Eliminar el ticket #${num}?`)) {
+          delete tickets[num];
+          localStorage.setItem('tickets', JSON.stringify(tickets));
+          renderTicketsFiltroGeneral(busquedaGeneral.value);
+        }
+      };
+      item.appendChild(btnDel);
       ticketsList.appendChild(item);
     });
   }
 
-  btnBuscarNombre.addEventListener('click', () => {
-    renderTicketsFiltro(busquedaNombre.value, busquedaNumero.value);
+  btnBuscarGeneral.addEventListener('click', () => {
+    renderTicketsFiltroGeneral(busquedaGeneral.value);
   });
-  btnBuscarNumero.addEventListener('click', () => {
-    renderTicketsFiltro(busquedaNombre.value, busquedaNumero.value);
-  });
-  busquedaNombre.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') renderTicketsFiltro(busquedaNombre.value, busquedaNumero.value);
-    if (!busquedaNombre.value && !busquedaNumero.value) renderTicketsFiltro();
-  });
-  busquedaNumero.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') renderTicketsFiltro(busquedaNombre.value, busquedaNumero.value);
-    if (!busquedaNombre.value && !busquedaNumero.value) renderTicketsFiltro();
+  busquedaGeneral.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') renderTicketsFiltroGeneral(busquedaGeneral.value);
+    if (!busquedaGeneral.value) renderTicketsFiltroGeneral();
   });
 
   function renderTickets() {
@@ -142,13 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.add('oculto');
     seleccionTemp = [];
     clearSeleccionados();
-    updatePanelInferior();
+    updatePanelSuperior();
   });
   cancelarBtn.addEventListener('click', () => {
     modal.classList.add('oculto');
     seleccionTemp = [];
     clearSeleccionados();
-    updatePanelInferior();
+    updatePanelSuperior();
   });
 
   function clearSeleccionados() {
@@ -175,13 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
         div.classList.remove('seleccionado');
       }
     });
-    renderTicketsFiltro();
+    renderTicketsFiltroGeneral();
     seleccionTemp = [];
     modal.classList.add('oculto');
     form.reset();
-    updatePanelInferior();
+    updatePanelSuperior();
   });
-  updatePanelInferior();
+  updatePanelSuperior();
   mostrarSeleccion();
 
   const hamburgerMenu = document.getElementById('hamburger-menu');

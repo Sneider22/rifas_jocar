@@ -24,28 +24,23 @@
       <div class="empresa-info">
         <h1>Rifas JoCar</h1>
         <p>¡Participa y gana en nuestra gran rifa!</p>
-        <p>Rifa válida hasta: <strong>31/12/2024</strong></p>
+        <p>Rifa válida hasta: <strong>que se vendan todos los tickets</strong></p>
       </div>
     </div>
   </header>
   <main>
     <section class="panel-numeros" id="pagina-seleccion">
       <button class="suerte-btn" id="btn-suerte"><span class="star">★</span> ELEGIR A LA SUERTE <span class="star">★</span></button>
+      <div class="contador-superior"><span id="contador-seleccionados">0</span> de <span id="max-seleccion">10</span> <span class="label">SELECCIONADOS</span></div>
       <h2 style="display:none;">Selecciona tus números</h2>
       <div id="numeros-grid" class="numeros-grid"></div>
-      <div class="panel-inferior" id="panel-inferior">
-        <div class="contador"><span id="contador-seleccionados">0</span> de <span id="max-seleccion">10</span></div>
-        <div class="label">SELECCIONADOS</div>
-        <button class="continuar-btn" id="btn-continuar" disabled><span class="flecha">↓</span> CONTINUAR</button>
-      </div>
     </section>
+    <button class="fab-continuar" id="btn-continuar" style="display:none;"><span class="flecha">↓</span> CONTINUAR</button>
     <section class="panel-tickets" id="pagina-tickets" style="display:none;">
       <h3>Tickets comprados</h3>
       <div class="buscador-tickets">
-        <input type="text" id="busqueda-nombre" placeholder="Buscar por nombre...">
-        <button id="btn-buscar-nombre">🔍 Nombre</button>
-        <input type="text" id="busqueda-numero" placeholder="Buscar por número..." style="margin-left:0.5em;">
-        <button id="btn-buscar-numero">🔍 Número</button>
+        <input type="text" id="busqueda-general" placeholder="Buscar por número, nombre, cédula o teléfono...">
+        <button id="btn-buscar-general">🔍</button>
       </div>
       <div id="tickets-list" class="tickets-list"></div>
     </section>

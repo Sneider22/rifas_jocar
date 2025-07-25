@@ -278,9 +278,24 @@ footer.footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5em;
 }
 .ticket-item strong {
   color: #1976d2;
+}
+.ticket-delete {
+  background: none;
+  border: none;
+  color: #b71c1c;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 1em;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.ticket-delete:hover {
+  color: #ff1744;
 }
 /* Menú desplegable responsivo */
 .navbar {
@@ -519,4 +534,59 @@ footer.footer {
 }
 .menu-overlay.active {
   display: block;
+} 
+.contador-superior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #222;
+  margin: 0.7em 0 1em 0;
+  gap: 0.4em;
+}
+.contador-superior .label {
+  color: #1976d2;
+  font-size: 0.95em;
+  font-weight: 700;
+  margin-left: 0.5em;
+}
+.fab-continuar {
+  position: fixed;
+  right: 18px;
+  bottom: 24px;
+  z-index: 120;
+  background: #bfa13a;
+  color: #fff;
+  font-size: 1.15em;
+  font-weight: bold;
+  border: none;
+  border-radius: 2em;
+  padding: 1em 2.2em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.fab-continuar:active {
+  background: #a88d2a;
+}
+.fab-continuar:disabled {
+  background: #d1d1d1;
+  color: #fff;
+  cursor: not-allowed;
+}
+.fab-continuar .flecha {
+  font-size: 1.3em;
+  margin-right: 0.5em;
+}
+@media (max-width: 700px) {
+  .fab-continuar {
+    right: 10px;
+    bottom: 16px;
+    padding: 0.9em 1.5em;
+    font-size: 1em;
+  }
 } 
