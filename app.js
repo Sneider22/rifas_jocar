@@ -242,30 +242,19 @@ document.addEventListener('DOMContentLoaded', () => {
   updatePanelSuperior();
   mostrarSeleccion();
 
-  const hamburgerMenu = document.getElementById('hamburger-menu');
   const navList = document.getElementById('nav-list');
   const menuOverlay = document.getElementById('menu-overlay');
 
   function closeMenu() {
     navList.classList.remove('open');
     menuOverlay.classList.remove('active');
-    hamburgerMenu.classList.remove('active');
   }
   
   function openMenu() {
     navList.classList.add('open');
     menuOverlay.classList.add('active');
-    hamburgerMenu.classList.add('active');
   }
   
-  hamburgerMenu.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (navList.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
   
   menuOverlay.addEventListener('click', closeMenu);
   
