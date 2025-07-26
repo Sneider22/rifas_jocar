@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     paginaTickets.style.display = '';
     navSeleccion.classList.remove('active');
     navTickets.classList.add('active');
+    renderTablaVisual(); // Actualizar la tabla visual cuando se muestra la sección
     renderTicketsFiltroGeneral();
   }
   navSeleccion.addEventListener('click', (e) => { e.preventDefault(); mostrarSeleccion(); });
@@ -125,7 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm(`¿Eliminar el ticket #${num}?`)) {
           delete tickets[num];
           localStorage.setItem('tickets', JSON.stringify(tickets));
+          // Actualizar la grilla principal
+          Array.from(grid.children).forEach(div => {
+            if (div.textContent === num) {
+              div.classList.remove('ocupado');
+            }
+          });
           renderTicketsFiltroGeneral(busquedaGeneral.value);
+          renderTablaVisual(); // Actualizar la tabla visual
         }
       };
       item.appendChild(btnDel);
@@ -150,6 +158,41 @@ document.addEventListener('DOMContentLoaded', () => {
       ticketsList.appendChild(item);
     });
   }
+
+  // Función para renderizar la tabla visual de números
+  function renderTablaVisual() {
+    const tablaVisualGrid = document.getElementById('tabla-visual-grid');
+    if (!tablaVisualGrid) return;
+    
+    // Limpiar la tabla existente
+    tablaVisualGrid.innerHTML = '';
+    
+    // Crear las 1000 celdas (000-999)
+    for (let i = 0; i < 1000; i++) {
+      const numStr = i.toString().padStart(3, '0');
+      const celda = document.createElement('div');
+      celda.className = 'celda-numero';
+      celda.textContent = numStr;
+      
+      // Verificar si el número está ocupado
+      if (tickets[numStr]) {
+        celda.classList.add('ocupado');
+      } else {
+        celda.classList.add('libre');
+      }
+      
+      // Agregar evento click para mostrar información del ticket
+      celda.addEventListener('click', () => {
+        if (tickets[numStr]) {
+          const data = tickets[numStr];
+          alert(`Número ${numStr}\nComprador: ${data.nombre}\nCédula: ${data.cedula}\nTeléfono: ${data.telefono}`);
+        }
+      });
+      
+      tablaVisualGrid.appendChild(celda);
+    }
+  }
+  
   renderTickets();
 
   cerrarModal.addEventListener('click', () => {
@@ -190,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     renderTicketsFiltroGeneral();
+    renderTablaVisual(); // Actualizar la tabla visual
     seleccionTemp = [];
     modal.classList.add('oculto');
     form.reset();
@@ -205,23 +249,49 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeMenu() {
     navList.classList.remove('open');
     menuOverlay.classList.remove('active');
+    hamburgerMenu.classList.remove('active');
+    // Permitir scroll en el body
+    document.body.style.overflow = '';
   }
+  
   function openMenu() {
     navList.classList.add('open');
     menuOverlay.classList.add('active');
+    hamburgerMenu.classList.add('active');
+    // Prevenir scroll en el body cuando el menú está abierto
+    document.body.style.overflow = 'hidden';
   }
-  hamburgerMenu.addEventListener('click', () => {
+  
+  hamburgerMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (navList.classList.contains('open')) {
       closeMenu();
     } else {
       openMenu();
     }
   });
+  
   menuOverlay.addEventListener('click', closeMenu);
+  
   // Cerrar menú al seleccionar opción
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
+    link.addEventListener('click', (e) => {
+      // Pequeño delay para que se vea la selección antes de cerrar
+      setTimeout(() => {
+        closeMenu();
+      }, 150);
     });
+  });
+  
+  // Cerrar menú con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navList.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+  
+  // Prevenir que el click en el menú lo cierre
+  navList.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 }); 

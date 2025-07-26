@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Rifa - Polla Fénix</title>
+  <title>Rifas JoCar</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,11 +38,29 @@
     <button class="fab-continuar" id="btn-continuar" style="display:none;"><span class="flecha">↓</span> CONTINUAR</button>
     <section class="panel-tickets" id="pagina-tickets" style="display:none;">
       <h3>Tickets comprados</h3>
+      
+      <!-- Cuadrícula visual de números -->
+      <div class="tabla-visual-container">
+        <h4>Estado de los números (000-999)</h4>
+        <div class="leyenda">
+          <div class="leyenda-item">
+            <div class="color-libre"></div>
+            <span>Disponible</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-ocupado"></div>
+            <span>Vendido</span>
+          </div>
+        </div>
+        <div id="tabla-visual-grid" class="tabla-visual-grid"></div>
+      </div>
+      
       <div class="buscador-tickets">
         <input type="text" id="busqueda-general" placeholder="Buscar por número, nombre, cédula o teléfono...">
         <button id="btn-buscar-general">🔍</button>
       </div>
       <div id="tickets-list" class="tickets-list"></div>
+      
     </section>
     <div id="modal-datos" class="modal oculto">
       <div class="modal-contenido">
@@ -67,18 +85,16 @@
   <footer class="footer">
     <div class="contacto">
       <h4>Contacto</h4>
-      <p>Tel: <a href="tel:+584124362660">+58 412-4362660</a></p>
-      <p>Email: <a href="mailto:info@pollafenix.com">info@pollafenix.com</a></p>
+      <p>Carlos Perez. Tel: <a href="https://wa.me/584124362660">+58 412-4362660</a></p>
+      <p>Johana Marquez. Tel: <a href="https://wa.me/584125044272">+58 412-5044272</a></p>
       <p><span style="font-size:1.2em;">📍</span> Socopó Estado Barinas<br> Carrera 11 entre calles 12 y 13</p>
     </div>
     <div class="redes">
       <h4>Síguenos</h4>
-      <a href="https://facebook.com/pollafenix" target="_blank">Facebook</a>
-      <a href="https://instagram.com/pollafenix" target="_blank">Instagram</a>
-      <a href="https://twitter.com/pollafenix" target="_blank">Twitter</a>
+      <a href="https://www.instagram.com/jocarsocopo?igsh=MWR1bmtjdnhyNTA4Mg==" target="_blank">Instagram</a>
     </div>
   </footer>
-  <a href="https://wa.me/573001234567" class="whatsapp-burbuja" target="_blank" title="Chatea con nosotros en WhatsApp">
+  <a href="https://wa.me/584124362660" class="whatsapp-burbuja" target="_blank" title="Chatea con nosotros en WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </a>
   <script src="app.js"></script>
