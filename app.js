@@ -250,16 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
     navList.classList.remove('open');
     menuOverlay.classList.remove('active');
     hamburgerMenu.classList.remove('active');
-    // Permitir scroll en el body
-    document.body.style.overflow = '';
   }
   
   function openMenu() {
     navList.classList.add('open');
     menuOverlay.classList.add('active');
     hamburgerMenu.classList.add('active');
-    // Prevenir scroll en el body cuando el menú está abierto
-    document.body.style.overflow = 'hidden';
   }
   
   hamburgerMenu.addEventListener('click', (e) => {
