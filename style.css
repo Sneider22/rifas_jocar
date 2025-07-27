@@ -14,7 +14,10 @@ body {
   padding: 1rem;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-height: 60px;
 }
+
+
 
 .nav-list {
   display: flex;
@@ -489,179 +492,78 @@ footer.footer {
     align-items: stretch;
     gap: 0.5em;
   }
-  .navbar ul {
-    flex-direction: column;
-    gap: 0;
-    align-items: stretch;
-  }
-  .navbar .nav-link {
-    border-radius: 0;
-    padding: 1em;
-    font-size: 1.15em;
-    border-bottom: 1px solid #fff;
-  }
-  .navbar .nav-link.active {
-    background: #ffd600;
-    color: #1976d2;
-    border-radius: 0;
-  }
+
 } 
-/* Menú hamburguesa */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  background: #fff;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  cursor: pointer;
-  z-index: 201;
-  transition: all 0.3s ease;
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-}
 
-.hamburger:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transform: scale(1.05);
-}
-
-.hamburger span {
-  display: block;
-  width: 26px;
-  height: 4px;
-  margin: 3px 0;
-  background: #bfa13a;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Animación del menú hamburguesa cuando está abierto */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(9px, 9px);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
-}
 @media (max-width: 700px) {
-  .hamburger {
-    display: flex;
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #1976d2;
+    padding: 0.8rem 1rem;
+    min-height: 70px;
   }
   
   .nav-list {
-    position: absolute;
-    top: 80px;
-    left: 20px;
-    width: 200px;
-    background: #fff;
-    flex-direction: column;
-    padding: 0.5rem 0;
-    margin: 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    z-index: 200;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    border: 2px solid #e3f2fd;
-  }
-  
-  .nav-list.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .nav-list li {
+    flex-direction: row;
+    gap: 0.5rem;
     width: 100%;
-    margin: 0;
+    justify-content: center;
   }
   
-  .nav-list .nav-link {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
+  .nav-link {
+    flex: 1;
+    max-width: 140px;
+    text-align: center;
+    padding: 0.7rem 0.8rem;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    font-size: 0.95rem;
     font-weight: 600;
-    color: #1976d2;
-    background: none;
-    border: none;
-    border-radius: 0;
-    margin: 0;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    border-bottom: 1px solid #f0f0f0;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   
-  .nav-list li:last-child .nav-link {
-    border-bottom: none;
+  .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
   
-  .nav-list .nav-link:hover {
-    background: #e3f2fd;
-    color: #1565c0;
-  }
-  
-  .nav-list .nav-link.active {
+  .nav-link.active {
     background: #ffd600;
     color: #1976d2;
     font-weight: 700;
+    border-color: #ffd600;
+    box-shadow: 0 4px 12px rgba(255,214,0,0.3);
   }
-  .navbar ul {
-    display: none;
-  }
-}
-@media (min-width: 701px) {
-  .hamburger {
-    display: none !important;
-  }
-  .nav-list {
-    position: static;
-    flex-direction: row;
-    background: none;
-    height: auto;
-    width: auto;
-    box-shadow: none;
-    padding: 0;
-    gap: 2em;
-    display: flex;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    border: none;
-  }
-}
-/* Fondo transparente al abrir menú (solo para cerrar al hacer click fuera) */
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
-  z-index: 199;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
 }
 
-.menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-} 
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.6rem 0.8rem;
+    min-height: 65px;
+  }
+  
+  .nav-list {
+    gap: 0.3rem;
+  }
+  
+  .nav-link {
+    max-width: 120px;
+    padding: 0.6rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 18px;
+  }
+  
+
+
+}
+
+ 
 .contador-superior {
   display: flex;
   align-items: center;

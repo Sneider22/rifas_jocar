@@ -242,41 +242,5 @@ document.addEventListener('DOMContentLoaded', () => {
   updatePanelSuperior();
   mostrarSeleccion();
 
-  const navList = document.getElementById('nav-list');
-  const menuOverlay = document.getElementById('menu-overlay');
 
-  function closeMenu() {
-    navList.classList.remove('open');
-    menuOverlay.classList.remove('active');
-  }
-  
-  function openMenu() {
-    navList.classList.add('open');
-    menuOverlay.classList.add('active');
-  }
-  
-  
-  menuOverlay.addEventListener('click', closeMenu);
-  
-  // Cerrar menú al seleccionar opción
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      // Pequeño delay para que se vea la selección antes de cerrar
-      setTimeout(() => {
-        closeMenu();
-      }, 150);
-    });
-  });
-  
-  // Cerrar menú con tecla Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && navList.classList.contains('open')) {
-      closeMenu();
-    }
-  });
-  
-  // Prevenir que el click en el menú lo cierre
-  navList.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
 }); 
