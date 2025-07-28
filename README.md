@@ -68,19 +68,6 @@ Sistema de gestión de rifas digital para la empresa JoCar. Permite la selecció
 - **Adaptación móvil**: Botones y textos optimizados
 - **Grid flexible**: Ajuste automático de columnas
 
-## 🎯 Casos de Uso
-
-### Para Administradores
-1. **Iniciar nueva rifa**: Usar botón de reinicio
-2. **Gestionar ventas**: Registrar compradores en modal
-3. **Consultar estado**: Ver tabla visual de números
-4. **Buscar tickets**: Usar filtro de búsqueda
-
-### Para Usuarios
-1. **Seleccionar números**: Click en números disponibles
-2. **Comprar tickets**: Llenar datos en formulario
-3. **Ver estado**: Navegar a sección de tickets
-
 ## 🔧 Tecnologías Utilizadas
 
 - **HTML5**: Estructura semántica
@@ -96,14 +83,6 @@ Sistema de gestión de rifas digital para la empresa JoCar. Permite la selecció
 - **Optimizado para móviles**: Touch-friendly
 - **Accesibilidad**: Navegación por teclado
 - **Performance**: Carga rápida y fluida
-
-## 🎨 Paleta de Colores
-
-- **Azul principal**: #1976d2
-- **Amarillo destacado**: #ffd600
-- **Verde disponible**: #4caf50
-- **Rojo ocupado**: #f44336
-- **Naranja reinicio**: #ff9800
 
 ---
 
