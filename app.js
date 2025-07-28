@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const contadorSeleccionados = document.getElementById('contador-seleccionados');
   const maxSeleccion = document.getElementById('max-seleccion');
   const btnContinuar = document.getElementById('btn-continuar');
+  const btnReinicio = document.getElementById('btn-reinicio');
   let seleccionTemp = [];
   const MAX_SELECCION = 10;
   maxSeleccion.textContent = MAX_SELECCION;
@@ -239,6 +240,34 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset();
     updatePanelSuperior();
   });
+
+  // Funcionalidad del botón de reinicio
+  btnReinicio.addEventListener('click', () => {
+    if (confirm('¿Estás seguro de que quieres reiniciar la rifa?\n\nEsto eliminará TODOS los tickets y liberará todos los números.\n\nEsta acción no se puede deshacer.')) {
+      // Limpiar todos los tickets
+      tickets = {};
+      localStorage.setItem('tickets', JSON.stringify(tickets));
+      
+      // Limpiar la selección temporal
+      seleccionTemp = [];
+      clearSeleccionados();
+      
+      // Marcar todos los números como disponibles
+      Array.from(grid.children).forEach(div => {
+        div.classList.remove('ocupado');
+        div.classList.remove('seleccionado');
+      });
+      
+      // Actualizar la interfaz
+      renderTicketsFiltroGeneral();
+      renderTablaVisual();
+      updatePanelSuperior();
+      
+      // Mostrar mensaje de confirmación
+      alert('✅ Rifa reiniciada exitosamente\n\nTodos los tickets han sido eliminados y los números están disponibles nuevamente.');
+    }
+  });
+
   updatePanelSuperior();
   mostrarSeleccion();
 

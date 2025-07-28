@@ -17,8 +17,6 @@ body {
   min-height: 60px;
 }
 
-
-
 .nav-list {
   display: flex;
   list-style: none;
@@ -36,6 +34,9 @@ body {
   background: #e3f2fd;
   transition: all 0.3s ease;
   border: 2px solid #bbdefb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-link:hover {
@@ -304,28 +305,7 @@ footer.footer {
   text-align: left;
 }
 
-.whatsapp-burbuja {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: #25d366;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  transition: box-shadow 0.2s;
-}
-.whatsapp-burbuja:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-}
-.whatsapp-burbuja img {
-  width: 36px;
-  height: 36px;
-}
+
 .panel-tickets {
   margin-top: 2rem;
   background: #fffde7;
@@ -368,6 +348,63 @@ footer.footer {
 }
 .ticket-delete:hover {
   color: #ff1744;
+}
+
+/* Botón de reinicio */
+.reinicio-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff3e0;
+  border-radius: 12px;
+  border: 2px solid #ffcc02;
+  text-align: center;
+}
+
+.btn-reinicio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.btn-reinicio:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+}
+
+.btn-reinicio:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.icono-reinicio {
+  font-size: 1.2rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reinicio-info {
+  margin-top: 0.8rem;
+  color: #e65100;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
 }
 /* Menú desplegable responsivo */
 .navbar {
@@ -514,16 +551,19 @@ footer.footer {
   
   .nav-link {
     flex: 1;
-    max-width: 140px;
+    max-width: 160px;
     text-align: center;
     padding: 0.7rem 0.8rem;
     border-radius: 20px;
     border: 2px solid rgba(255,255,255,0.3);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     background: rgba(255,255,255,0.1);
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .nav-link:hover {
@@ -553,10 +593,13 @@ footer.footer {
   }
   
   .nav-link {
-    max-width: 120px;
+    max-width: 140px;
     padding: 0.6rem 0.6rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     border-radius: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
 
