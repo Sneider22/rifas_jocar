@@ -1,4 +1,4 @@
-# 🎯 Rifas JoCar
+# 🎯 Rifas JoCar (Versión Beta)
 
 Sistema de gestión de rifas digital para la empresa JoCar. Permite la selección de números, gestión de tickets y visualización del estado de la rifa en tiempo real.
 
