@@ -1,0 +1,849 @@
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  background: #e3f0ff;
+  color: #1a237e;
+}
+
+/* Estilos base del navbar */
+.navbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-height: 60px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #1976d2;
+  background: #e3f2fd;
+  transition: all 0.3s ease;
+  border: 2px solid #bbdefb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-link:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: #ffd600;
+  color: #1976d2;
+  border-color: #ffd600;
+}
+
+.header {
+  background: #fffde7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-info {
+  display: flex;
+  align-items: center;
+  
+  gap: 1.5rem;
+}
+.logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%; /* Esto hará que la imagen sea circular */
+  transition: transform 0.3s; /* Suaviza la transición del hover */
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
+}
+
+.empresa-info h1 {
+  margin: 0 0 0.2em 0;
+  font-size: 2rem;
+  color: #1976d2;
+  text-align: center; 
+}
+
+.empresa-info p {
+  margin: 0.1em 0;
+  text-align: center; 
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.panel-numeros h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Botón "Elegir a la suerte" */
+.suerte-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.2em auto 1em auto;
+  padding: 0.6em 2em;
+  background: #fff;
+  border: 2.5px solid #bfa13a;
+  color: #bfa13a;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.suerte-btn:hover {
+  background: #fffbe7;
+}
+.suerte-btn .star {
+  margin: 0 0.5em;
+  font-size: 1.2em;
+}
+
+/* Números estilo círculo gris */
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.5em;
+  justify-items: center;
+  margin-bottom: 5em;
+}
+
+@media (min-width: 500px) {
+  .numeros-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+.numero {
+  width: 48px;
+  height: 38px;
+  background: #e3f2fd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #1976d2;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  user-select: none;
+  border: 2px solid #bbdefb;
+  margin: 1px;
+  box-shadow: none;
+}
+.numero.seleccionado {
+  background: #ffd600;
+  color: #1976d2;
+  border: 2px solid #ffd600;
+  box-shadow: 0 0 6px #ffd60099;
+}
+.numero.ocupado {
+  background: #e0e0e0;
+  color: #bdbdbd;
+  border: 2px solid #bdbdbd;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Panel inferior fijo para selección */
+.panel-inferior {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  padding: 1em 0.7em 1.2em 0.7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  margin-bottom: 80px;
+}
+.panel-inferior .contador {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #bfa13a;
+  margin-bottom: 0.2em;
+}
+.panel-inferior .contador span {
+  color: #222;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-left: 0.2em;
+}
+.panel-inferior .label {
+  font-size: 0.95em;
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 0.7em;
+}
+.panel-inferior .continuar-btn {
+  width: 90vw;
+  max-width: 350px;
+  background: #bfa13a;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 1.5em;
+  padding: 0.9em 0;
+  margin-top: 0.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+}
+.panel-inferior .continuar-btn:disabled {
+  background: #d1d1d1;
+  color: #fff;
+  cursor: not-allowed;
+}
+.panel-inferior .flecha {
+  font-size: 1.3em;
+  margin-right: 0.5em;
+}
+
+@media (min-width: 700px) {
+  .panel-inferior {
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 80px;
+  }
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal.oculto {
+  display: none;
+}
+.modal-contenido {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  position: relative;
+}
+.cerrar-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+footer.footer {
+  background: #222;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 10vw;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer h4 {
+  text-align: left;
+}
+
+.footer a {
+  color: #e67e22;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.creditos {
+  text-align: center;
+  font-size: 0.9em;
+  color: #bbb;
+}
+
+.footer-ultimo {
+  color: aqua;
+  text-align: left;
+}
+
+
+.panel-tickets {
+  margin-top: 2rem;
+  background: #fffde7;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.tickets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.ticket-item {
+  background: #e3f2fd;
+  border-left: 5px solid #ffd600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #1a237e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+}
+.ticket-item strong {
+  color: #1976d2;
+}
+.ticket-delete {
+  background: none;
+  border: none;
+  color: #b71c1c;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 1em;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.ticket-delete:hover {
+  color: #ff1744;
+}
+
+/* Estilos para botones de cobro (global) */
+.cobro-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+#btn-enviar-cobro, #btn-reset-cobro {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg,#1976d2,#125aa3);
+  box-shadow: 0 6px 18px rgba(25,118,210,0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s;
+}
+
+#btn-enviar-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,90,163,0.2); }
+#btn-enviar-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(18,90,163,0.16); }
+
+#btn-reset-cobro {
+  background: linear-gradient(180deg,#ff7043,#e64a19);
+}
+#btn-reset-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(230,74,25,0.18); }
+#btn-reset-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(230,74,25,0.14); }
+
+#cobro-estado {
+  font-size: 0.95rem;
+  color: #333;
+  background: rgba(255,255,255,0.6);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* Botón de reinicio */
+.reinicio-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff3e0;
+  border-radius: 12px;
+  border: 2px solid #ffcc02;
+  text-align: center;
+}
+
+.btn-reinicio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.btn-reinicio:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+}
+
+.btn-reinicio:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.icono-reinicio {
+  font-size: 1.2rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reinicio-info {
+  margin-top: 0.8rem;
+  color: #e65100;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+/* Menú desplegable responsivo */
+.navbar {
+  background: #1976d2;
+  padding: 0.5em 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin: 0;
+  padding: 0;
+}
+.navbar .nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 0.5em 1.2em;
+  border-radius: 6px 6px 0 0;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar .nav-link.active, .navbar .nav-link:hover {
+  background: #ffd600;
+  color: #1976d2;
+}
+.buscador-tickets {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+.buscador-tickets input {
+  padding: 0.5em 1em;
+  border: 1.5px solid #1976d2;
+  border-radius: 6px;
+  font-size: 1em;
+  outline: none;
+}
+.buscador-tickets button {
+  background: #ffd600;
+  color: #1976d2;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  font-size: 1.1em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.buscador-tickets button:hover {
+  background: #ffe066;
+}
+/* Formulario de registro responsivo y estético */
+#modal-datos .modal-contenido form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+#modal-datos label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  color: #1976d2;
+}
+#modal-datos input[type="text"],
+#modal-datos input[type="tel"] {
+  padding: 0.7em 1em;
+  border: 1.5px solid #1976d2;
+  border-radius: 7px;
+  font-size: 1.1em;
+  outline: none;
+  margin-bottom: 0.2em;
+}
+#modal-datos .modal-botones {
+  flex-direction: column;
+  gap: 0.7em;
+}
+#modal-datos button {
+  width: 100%;
+  padding: 0.8em 0;
+  font-size: 1.1em;
+}
+
+/* Mejorar responsividad general */
+@media (max-width: 700px) {
+  main {
+    padding: 0.5rem;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 2vw;
+  }
+  .numeros-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .numero {
+    width: 32px;
+    height: 28px;
+    font-size: 0.95em;
+  }
+  .logo-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .panel-tickets, .panel-numeros {
+    padding: 0.5em 0.2em;
+  }
+  .ticket-item {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1em;
+    gap: 0.2em;
+  }
+  .buscador-tickets {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5em;
+  }
+
+} 
+
+@media (max-width: 700px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #1976d2;
+    padding: 0.8rem 1rem;
+    min-height: 70px;
+  }
+  
+  .nav-list {
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .nav-link {
+    flex: 1;
+    max-width: 160px;
+    text-align: center;
+    padding: 0.7rem 0.8rem;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .nav-link.active {
+    background: #ffd600;
+    color: #1976d2;
+    font-weight: 700;
+    border-color: #ffd600;
+    box-shadow: 0 4px 12px rgba(255,214,0,0.3);
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.6rem 0.8rem;
+    min-height: 65px;
+  }
+  
+  .nav-list {
+    gap: 0.3rem;
+  }
+  
+  .nav-link {
+    max-width: 140px;
+    padding: 0.6rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+
+
+}
+
+ 
+.contador-superior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #222;
+  margin: 0.7em 0 1em 0;
+  gap: 0.4em;
+}
+.contador-superior .label {
+  color: #1976d2;
+  font-size: 0.95em;
+  font-weight: 700;
+  margin-left: 0.5em;
+}
+.fab-continuar {
+  position: fixed;
+  right: 18px;
+  bottom: 24px;
+  z-index: 120;
+  background: #bfa13a;
+  color: #fff;
+  font-size: 1.15em;
+  font-weight: bold;
+  border: none;
+  border-radius: 2em;
+  padding: 1em 2.2em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.fab-continuar:active {
+  background: #a88d2a;
+}
+.fab-continuar:disabled {
+  background: #d1d1d1;
+  color: #fff;
+  cursor: not-allowed;
+}
+.fab-continuar .flecha {
+  font-size: 1.3em;
+  margin-right: 0.5em;
+}
+@media (max-width: 700px) {
+  .fab-continuar {
+    right: 10px;
+    bottom: 16px;
+    padding: 0.9em 1.5em;
+    font-size: 1em;
+  }
+} 
+
+/* Estilos para la cuadrícula visual de números en Ver Tickets */
+.tabla-visual-container {
+  margin-bottom: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 0.8rem;
+  border: 1px solid #e3f2fd;
+}
+
+.tabla-visual-container h4 {
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+  color: #1976d2;
+  font-size: 1rem;
+}
+
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.color-libre, .color-ocupado {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid;
+}
+
+.color-libre {
+  background: #e3f2fd;
+  border-color: #bbdefb;
+}
+
+.color-ocupado {
+  background: #ffcdd2;
+  border-color: #f44336;
+}
+
+.tabla-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  gap: 1px;
+  justify-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.celda-numero {
+  width: 100%;
+  aspect-ratio: 1;
+  min-width: 16px;
+  min-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+
+.celda-numero.libre {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-color: #bbdefb;
+}
+
+.celda-numero.ocupado {
+  background: #ffcdd2;
+  color: #c62828;
+  border-color: #f44336;
+  font-weight: 700;
+}
+
+.celda-numero:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsividad para la tabla visual - Diseño compacto para capturas */
+@media (max-width: 1200px) {
+  .tabla-visual-grid {
+    grid-template-columns: repeat(25, 1fr);
+  }
+  .celda-numero {
+    font-size: 0.55rem;
+    min-width: 14px;
+    min-height: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tabla-visual-grid {
+    grid-template-columns: repeat(20, 1fr);
+  }
+  .celda-numero {
+    font-size: 0.5rem;
+    min-width: 12px;
+    min-height: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  .tabla-visual-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .celda-numero {
+    font-size: 0.75rem;
+    min-width: 16px;
+    min-height: 16px;
+  }
+  .leyenda {
+    gap: 0.5rem;
+  }
+  .tabla-visual-container {
+    padding: 0.5rem;
+  }
+  .tabla-visual-container h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .tabla-visual-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .celda-numero {
+    font-size: 0.7rem;
+    min-width: 14px;
+    min-height: 14px;
+  }
+}

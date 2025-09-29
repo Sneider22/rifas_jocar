@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rifas JoCar</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <ul id="nav-list" class="nav-list">
+      <li><a href="#" id="nav-seleccion" class="nav-link active">Seleccionar Números</a></li>
+      <li><a href="#" id="nav-tickets" class="nav-link">Ver Tickets</a></li>
+    </ul>
+  </nav>
+  <header class="header">
+    <div class="logo-info">
+      <img src="logo-jocar.png" alt="Logo Rifas JoCar" class="logo">
+      <div class="empresa-info">
+        <h1>Rifas JoCar</h1>
+        <p>¡Participa y gana en nuestra gran rifa!</p>
+        <p>Rifa válida hasta: <strong>que se vendan todos los tickets</strong></p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="panel-numeros" id="pagina-seleccion">
+      <button class="suerte-btn" id="btn-suerte"><span class="star">★</span> ELEGIR A LA SUERTE <span class="star">★</span></button>
+      <div class="contador-superior"><span id="contador-seleccionados">0</span> de <span id="max-seleccion">10</span> <span class="label">SELECCIONADOS</span></div>
+      <h2 style="display:none;">Selecciona tus números</h2>
+      <div id="numeros-grid" class="numeros-grid"></div>
+    </section>
+    <button class="fab-continuar" id="btn-continuar" style="display:none;"><span class="flecha">↓</span> CONTINUAR</button>
+    <section class="panel-tickets" id="pagina-tickets" style="display:none;">
+      <h3>Tickets comprados</h3>
+      
+      <!-- Cuadrícula visual de números -->
+      <div class="tabla-visual-container">
+        <h4>Estado de los números (000-999)</h4>
+        <div class="leyenda">
+          <div class="leyenda-item">
+            <div class="color-libre"></div>
+            <span>Disponible</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-ocupado"></div>
+            <span>Vendido</span>
+          </div>
+        </div>
+        <div id="tabla-visual-grid" class="tabla-visual-grid"></div>
+      </div>
+      
+      <div class="buscador-tickets">
+        <input type="text" id="busqueda-general" placeholder="Buscar por número, nombre, cédula o teléfono...">
+        <button id="btn-buscar-general">🔍</button>
+      </div>
+      <div id="tickets-list" class="tickets-list"></div>
+      <div class="cobro-container" style="margin-top:1em;">
+        <button id="btn-enviar-cobro" class="btn-cobro">Enviar mensaje de cobro</button>
+        <span id="cobro-estado" style="margin-left:10px;color:#555;"> </span>
+        <button id="btn-reset-cobro" style="margin-left:10px;">Reiniciar cobros</button>
+      </div>
+      
+      <!-- Botón de reinicio -->
+      <div class="reinicio-container">
+        <button id="btn-reinicio" class="btn-reinicio">
+          <span class="icono-reinicio">🔄</span>
+          REINICIAR RIFA
+        </button>
+        <p class="reinicio-info">Elimina todos los tickets y libera todos los números</p>
+      </div>
+      
+    </section>
+    <div id="modal-datos" class="modal oculto">
+      <div class="modal-contenido">
+        <span id="cerrar-modal" class="cerrar-modal">&times;</span>
+        <h3>Ingresa los datos del comprador</h3>
+        <div id="numeros-seleccionados-info" style="margin-bottom: 1em; color: #1976d2; font-weight: bold;"></div>
+        <form id="form-datos">
+          <label for="nombre">Nombre completo:</label>
+          <input type="text" id="nombre" name="nombre" required>
+          <label for="cedula">Cédula:</label>
+          <input type="text" id="cedula" name="cedula" required pattern="[0-9]+">
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required pattern="[0-9]+">
+          <div class="modal-botones">
+            <button type="submit">Confirmar</button>
+            <button type="button" id="cancelar">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="contacto">
+      <h4>Contacto</h4>
+      <p>Carlos Perez. Tel: <a href="https://wa.me/584124362660">+58 412-4362660</a></p>
+      <p>Johana Marquez. Tel: <a href="https://wa.me/584125044272">+58 412-5044272</a></p>
+      <p><span style="font-size:1.2em;">📍</span> Socopó Estado Barinas<br> Carrera 11 entre calles 12 y 13</p>
+    </div>
+    <div class="redes">
+      <h4>Síguenos</h4>
+      <a href="https://www.instagram.com/jocarsocopo?igsh=MWR1bmtjdnhyNTA4Mg==" target="_blank">Instagram</a>
+    </div>
+    <div class="creditos">
+      <h4><span>&copy; 2025 Sneider Araque</span></h4>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
