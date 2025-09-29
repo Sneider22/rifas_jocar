@@ -270,6 +270,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updatePanelSuperior();
   mostrarSeleccion();
+});
 
+// Fuera del DOMContentLoaded: lógica global para cobros
+// (se coloca aquí para evitar usar variables internas no accesibles fuera)
+(function() {
+  // Construye la lista ordenada de entradas únicas por teléfono (primer ticket por teléfono)
+  function obtenerColaCobro() {
+    const tickets = JSON.parse(localStorage.getItem('tickets') || '{}');
+    const nums = Object.keys(tickets).sort();
+    const seen = new Set();
+    const cola = [];
+    for (const num of nums) {
+      const data = tickets[num];
+      if (!data || !data.telefono) continue;
+      const telNorm = data.telefono.replace(/\D/g, '');
+      if (!telNorm) continue;
+      if (seen.has(telNorm)) continue; // ya agregamos este teléfono
+      seen.add(telNorm);
+      cola.push({ num, telefono: data.telefono, nombre: data.nombre });
+    }
+    return cola;
+  }
 
-}); 
+  function formatearTelefonoParaWA(telefono) {
+    if (!telefono) return null;
+    let t = telefono.replace(/\D/g, '');
+    if (t.length === 10) t = '58' + t; // asumir Venezuela si no tiene código
+    return t;
+  }
+
+  function actualizarEstadoCobro() {
+    const estadoSpan = document.getElementById('cobro-estado');
+    const cola = obtenerColaCobro();
+    let index = parseInt(localStorage.getItem('cobro_index') || '0', 10);
+    if (isNaN(index)) index = 0;
+    if (cola.length === 0) {
+      estadoSpan.textContent = 'No hay tickets para cobrar.';
+    } else if (index >= cola.length) {
+      estadoSpan.textContent = `Cobros completados (${cola.length} contactos).`;
+    } else {
+      const entry = cola[index];
+      estadoSpan.textContent = `Siguiente: #${entry.num} — ${entry.nombre || ''} — ${entry.telefono} (contacto ${index+1} de ${cola.length})`;
+    }
+  }
+
+  function enviarSiguienteCobro() {
+    const cola = obtenerColaCobro();
+    if (cola.length === 0) {
+      alert('No hay tickets para cobrar.');
+      return;
+    }
+    let index = parseInt(localStorage.getItem('cobro_index') || '0', 10);
+    if (isNaN(index)) index = 0;
+    if (index >= cola.length) {
+      alert('Ya se han procesado todos los cobros. Reinicia la cola si quieres volver a empezar.');
+      actualizarEstadoCobro();
+      return;
+    }
+    const entry = cola[index];
+    if (!entry) {
+      // nada por procesar, avanzar
+      localStorage.setItem('cobro_index', (index+1).toString());
+      actualizarEstadoCobro();
+      return;
+    }
+    const telefonoForm = formatearTelefonoParaWA(entry.telefono);
+    if (!telefonoForm) {
+      alert(`El contacto del ticket #${entry.num} no tiene un teléfono válido.`);
+      // marcar como procesado y continuar
+      localStorage.setItem('cobro_index', (index+1).toString());
+      actualizarEstadoCobro();
+      return;
+    }
+    const mensaje = encodeURIComponent('Paguen pues, o le clavamos rezagado');
+    const url = `https://wa.me/${telefonoForm}?text=${mensaje}`;
+    // Abrir en nueva pestaña para que el usuario pueda volver al sistema
+    window.open(url, '_blank');
+    // Avanzar el índice para la próxima vez que regrese
+    localStorage.setItem('cobro_index', (index+1).toString());
+    actualizarEstadoCobro();
+  }
+
+  function resetearColaCobro() {
+    localStorage.setItem('cobro_index', '0');
+    actualizarEstadoCobro();
+  }
+
+  // Inicializar botones cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnCobro = document.getElementById('btn-enviar-cobro');
+    const btnReset = document.getElementById('btn-reset-cobro');
+    if (btnCobro) btnCobro.addEventListener('click', enviarSiguienteCobro);
+    if (btnReset) btnReset.addEventListener('click', () => {
+      if (confirm('¿Reiniciar la secuencia de cobros?')) resetearColaCobro();
+    });
+    // Inicializar estado
+    if (!localStorage.getItem('cobro_index')) localStorage.setItem('cobro_index', '0');
+    actualizarEstadoCobro();
+    // Reactualizar estado cuando cambien los tickets (escuchar storage por cambios remotos)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'tickets') actualizarEstadoCobro();
+      if (e.key === 'cobro_index') actualizarEstadoCobro();
+    });
+  });
+})();

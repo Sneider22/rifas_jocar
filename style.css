@@ -53,48 +53,42 @@ body {
 .header {
   background: #fffde7;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  padding: 1.5rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo-info {
+/* Estilos para botones de cobro (global) */
+.cobro-container {
   display: flex;
   align-items: center;
-  
-  gap: 1.5rem;
-}
-.logo {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border-radius: 50%; /* Esto hará que la imagen sea circular */
-  transition: transform 0.3s; /* Suaviza la transición del hover */
+  gap: 0.6rem;
+  margin-top: 1rem;
 }
 
-.logo:hover {
-  transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
+#btn-enviar-cobro, #btn-reset-cobro {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg,#1976d2,#125aa3);
+  box-shadow: 0 6px 18px rgba(25,118,210,0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s;
 }
 
-.empresa-info h1 {
-  margin: 0 0 0.2em 0;
-  font-size: 2rem;
-  color: #1976d2;
-  text-align: center; 
-}
+#btn-enviar-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,90,163,0.2); }
+#btn-enviar-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(18,90,163,0.16); }
 
-.empresa-info p {
-  margin: 0.1em 0;
-  text-align: center; 
+#btn-reset-cobro {
+  background: linear-gradient(180deg,#ff7043,#e64a19);
 }
+#btn-reset-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(230,74,25,0.18); }
+#btn-reset-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(230,74,25,0.14); }
 
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+#cobro-estado {
+  font-size: 0.95rem;
+  color: #333;
+  background: rgba(255,255,255,0.6);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+}
 }
 .panel-numeros h2 {
   text-align: center;
@@ -346,10 +340,45 @@ footer.footer {
   display: flex;
   align-items: center;
 }
-.ticket-delete:hover {
+ticket-delete:hover {
   color: #ff1744;
 }
+/* Estilos para botones de cobro (global) */
+.cobro-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
 
+#btn-enviar-cobro, #btn-reset-cobro {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg,#1976d2,#125aa3);
+  box-shadow: 0 6px 18px rgba(25,118,210,0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s;
+}
+
+#btn-enviar-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,90,163,0.2); }
+#btn-enviar-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(18,90,163,0.16); }
+
+#btn-reset-cobro {
+  background: linear-gradient(180deg,#ff7043,#e64a19);
+}
+#btn-reset-cobro:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(230,74,25,0.18); }
+#btn-reset-cobro:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(230,74,25,0.14); }
+
+#cobro-estado {
+  font-size: 0.95rem;
+  color: #333;
+  background: rgba(255,255,255,0.6);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+}
 /* Botón de reinicio */
 .reinicio-container {
   margin-top: 2rem;
