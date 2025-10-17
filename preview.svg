@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1976d2"/>
+      <stop offset="1" stop-color="#42a5f5"/>
+    </linearGradient>
+    <style>
+      .title { font-family: 'Montserrat', Arial, sans-serif; fill: #fff; font-weight:700; font-size:64px; }
+      .subtitle { font-family: 'Montserrat', Arial, sans-serif; fill: #fff; font-size:28px; opacity:0.95; }
+      .chip { fill: rgba(255,255,255,0.12); stroke: rgba(255,255,255,0.18); stroke-width:1; rx:12; ry:12; }
+      .number { font-family: 'Montserrat', Arial, sans-serif; fill: #fff; font-weight:700; font-size:40px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g transform="translate(60,60)">
+    <rect class="chip" x="0" y="0" width="1080" height="510" rx="20" ry="20"/>
+    <g transform="translate(40,40)">
+      <text class="title" x="0" y="70">Rifas JoCar</text>
+      <text class="subtitle" x="0" y="120">¡Participa y gana! Números del 000 al 999</text>
+
+      <g transform="translate(0,170)">
+        <rect x="0" y="0" width="360" height="120" rx="12" ry="12" fill="rgba(255,255,255,0.06)"/>
+        <text class="number" x="24" y="72">Tickets disponibles</text>
+        <text class="number" x="580" y="72">Compra fácil por WhatsApp</text>
+      </g>
+
+      <g transform="translate(0,320)">
+        <text class="subtitle" x="0" y="34">Contacto: +58 412-4362660</text>
+      </g>
+    </g>
+  </g>
+</svg>
