@@ -63,19 +63,7 @@ Sistema de gestión de rifas digital para la empresa JoCar. Permite la selecció
 - **Estructura JSON**: Datos organizados por número de ticket
 - **Backup automático**: Guardado instantáneo al agregar tickets
 
-### 📱 Responsive Design
-- **Breakpoints**: 480px, 700px, 900px, 1200px
-- **Adaptación móvil**: Botones y textos optimizados
-- **Grid flexible**: Ajuste automático de columnas
-
-## 🔧 Tecnologías Utilizadas
-
-- **HTML5**: Estructura semántica
-- **CSS3**: Estilos modernos y animaciones
-- **JavaScript ES6+**: Lógica de aplicación
-- **localStorage API**: Persistencia de datos
-- **CSS Grid & Flexbox**: Layout responsivo
-
+  
 ## 📋 Características Técnicas
 
 - **Sin dependencias externas**: Funciona offline
@@ -86,16 +74,3 @@ Sistema de gestión de rifas digital para la empresa JoCar. Permite la selecció
 
 ---
 
-## 👨‍💻 Créditos
-
-**Desarrollado por [Sneider Araque](https://github.com/sneider22)**
-
-*Sistema de Rifas JoCar - 2025*
-
----
-
-### 📞 Contacto JoCar
-- **Carlos Perez**: +58 412-4362660
-- **Johana Marquez**: +58 412-5044272
-- **📍 Ubicación**: Socopó Estado Barinas, Carrera 11 entre calles 12 y 13
-- **📱 Instagram**: [@jocarsocopo](https://www.instagram.com/jocarsocopo) 
